@@ -1,0 +1,93 @@
+---
+title: "Untitled"
+author: "Oscar Montoya"
+date: "October 8, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+rm(list=ls(all=TRUE))
+```
+
+```{r}
+
+```
+
+
+### Data manageent with dplyr
+dplyr (Hadley Wickham) simplifies data management by makign it more "human readable" relative to base R
+
+
+#### Data selection and extraction
+
+Can use subset() to split the data based on some logical argument contained within the dataset. For example, let's only look at data from the first half of the experiment (before day 200)
+
+```{r}
+
+#Option 1
+
+
+
+```
+
+
+```{r}
+#Option 2
+
+#install.packages("dplyr")
+library(dplyr)
+
+
+# Why is it not working?
+
+
+
+# Programmer dad joke:
+!FALSE is funny because is TRUE!
+```
+
+With dplyr's filter
+```{r}
+
+  # Observations with a sepal lenght less than 5
+
+   # Observations with a sepal lenght equal or less than 5
+
+   # Observations with a petal width more than than 5
+
+   # Observations with a sepal lenght equal or more than 5
+
+   # Observations with a sepal lenght different than 5
+
+   # Observations with a sepal lenght equl or more than 5 and a sepal width more than 4)
+
+   # Observation with a sepal lenght equal or more than 5 or a sepal width more than 4
+```
+
+
+With dplyr's select
+
+```{r}
+
+
+```
+
+
+Sort data using arrange()
+```{r}
+
+
+```
+
+
+#### Summary statistics with dplyr
+
+```{r}
+
+```
+
+

@@ -1,0 +1,331 @@
+---
+title: "Introduction to data analysis and visualization with R_RStudio. Working directory, importing data, and strings management"
+author: "Oscar Montoya"
+date: "November 26th, 2019"
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+    toc_depth: 3
+  html_notebook:
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Objective
+- Learn how to set a working directory
+- Import your data into R
+- Become familiar with some of R's functions for strings management
+
+At the end of this section you should be able to set a working directory, read comma-separated value files, and manipulate strings.
+
+### Working directory
+Setting a working directory (wd) helps you to keep things tidy.
+
+Set the wd using the setwd() command
+```{r}
+# Always start with a clean environment
+rm(list=ls(all=TRUE))
+
+# First, check what is your current directory
+
+
+# Set working directory
+
+
+```
+
+
+Set the wd using RStudio GUI (bottom-left panel)
+
+### Importing comma separated files
+```{r}
+
+
+
+# if needed can concert Species into factor and write it to iris.dataset
+
+   #Now Species is a factor (categorical data)
+```
+
+
+### Summary statistics
+
+Most common statistical basic functions (e.g. central tendency and dispesion measures) are included in the basic intallation of R (base R)
+
+```{r}
+
+# Read iris dataset and add one NA value
+
+
+
+
+# Get the mean of Sepal.Length
+   # The answer is NA
+   # Removing NA fixes the issue
+
+
+
+
+#No function for standard error so let's install a package that has it:
+#install.packages("plotrix")
+library(plotrix)
+
+
+
+```
+
+Other functions to inquire about the data
+```{r}
+
+     
+
+      # what's going on? The subset data has one column so it's not possible to count the number of columns of a vector
+
+
+
+
+
+```
+
+#### Logical operators
+
+To find "types" of numbers, %/% and %% are handy
+
+```{r}
+
+
+# %% returns the remainder
+
+
+# %/% returns the quotient
+
+
+#Even numbers
+
+
+#numbers divisible by 5 **OR** 6
+
+
+# Numbers that are not divisible by 4
+
+```
+
+
+Can also use brackets for more complicated selections
+
+```{r}
+
+
+```
+
+
+### Problem 
+Use logical operators to simultaneously find the odd numbers between -50 and 0 (inclusive) and the even numbers between 0 and 50 (inclusive)
+
+```{r}
+
+
+
+```
+
+
+
+Problem 1
+
+Triple the vaues for sepal length in iris.dataset. Name the new variable "Sepal.Legth.Triple".
+```{r}
+
+# to add a new column:
+
+
+```
+
+
+### Character data manipulation:
+
+```{r}
+?substring()
+?strsplit()
+?paste()
+?sub()
+?gsub()
+?grep()
+?sapply()
+?match()
+?unique
+```
+
+
+#### Strings manipulation
+```{r}
+?as.integer
+?c
+?"["
+?letters
+
+
+
+# R is smart (most of the time), for logical operators it ranks character sequences alpha-numerically
+```
+
+
+##### Combine strings
+```{r}
+?paste
+
+#Use the paste function to combine multiple vectors of character data into a single string
+
+
+#Can change the seperation using the sep parameter
+
+
+
+# can combine multiple objects from a single vector into a single string
+
+
+
+#Can combine any one-celled variable
+
+
+#If you have multi-celled variables, you will create multiple strings
+
+```
+
+
+##### Separate strings
+```{r}
+
+?substring
+?nchar
+?strsplit
+?sub
+
+#substring (aka substr) and strsplit can seperate strings
+
+
+#substring grabs the characters between two points in the string
+
+
+
+#nchar tells you how long the string is
+
+
+
+#strsplit seperates the string into fragments
+#It makes breaks when it finds the string you want within the larger string
+
+
+
+#The string you are breaking on is not included in the output
+
+
+
+
+#strsplit puts its output inside of a list (since the arrays in the list can be of different sizes)
+#We get pull the relevant vector/array out of a list using [[NUMBER]]
+
+
+
+#We can use sapply if our list has multiple slots and each array is the same size
+
+
+        # Use any of the characters inside the quoatation marks as string separator
+
+
+#The ".*X" syntax is a regular expression that is recognizable to perl and other languages. It is matching the X argument after any given string, in this case it is matching on the colon (:) and splitting the string and ignoring everything prior to the colon
+
+
+
+# Try a value of 1, and a value of 2 here
+
+
+# Why does the sapply function work??? Because the command "[" is a command to R to extract information specific to lists and the function 'strsplit' creates an object formatted as a list
+
+
+```
+
+
+##### Managing strings
+
+```{r}
+
+?"[["
+?substr
+?substring
+
+
+
+# substring(x, start, stop)
+
+
+
+## ^^ Try different values instead of 4, such as 3, 5, 1, etc.
+
+
+
+# Other ways to get similar results as previously done
+
+
+
+# ^^ Try different values for 1 above
+
+
+
+```
+
+
+
+##### Matching strings
+
+```{r}
+?match
+?grep
+
+
+
+```
+
+
+### Saving R sessions and individual objects\
+When/why to save entire sessions?
+When you have ran long analyis and want to save some time that you open them, given the case that you actually need to keep working the unfinished work
+
+When to save individual objects?
+WHen you need to import your object/table or simply save it for later
+
+```{r, eval=FALSE}
+# Save the session
+
+
+# Save individual objects
+
+
+```
+
+
+### Saving objects in comma separated value (csv) format
+How to save in tab separated, colon separated, etc.?
+
+```{r}
+
+
+```
+
+### Get information about your session
+It's always good practice to be aware and report the packages/versions used in your analysis
+```{r}
+
+```

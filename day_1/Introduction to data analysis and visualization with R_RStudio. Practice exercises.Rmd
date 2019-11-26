@@ -1,0 +1,227 @@
+---
+title: "Introduction to data analysis and visualization with R_RStudio. Practice exercises"
+author: "Oscar Montoya"
+date: "November 26th, 2019"
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+    toc_depth: 3
+  html_notebook:
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Data basics
+
+#### Question 1. 
+Make a variable named X which is equal to 17
+```{r, include=FALSE, echo=FALSE}
+
+```
+
+#### Question 2.
+Add 28 to the variable you just created and multiply the result by 45. Divide the product by 78. Each new operation will give you a new variable 
+ 
+```{r, include=FALSE, echo=FALSE}
+
+```
+
+#### Question 3. 
+Write the entire code from question #2 as a single line (hint: as you would if you were using a scientific calculator or Excel!)
+
+```{r, include=FALSE, echo=FALSE}
+
+
+```
+
+
+#### Question 4. 
+Overwrite the 'x' variable with a new value equal to 89
+
+```{r, include=FALSE, echo=FALSE}
+
+```
+
+#### Question 5. 
+Create a second variable which will be x + 5! (i.e. 5 factorial), and divide your new variable by x
+
+```{r, include=FALSE, echo=FALSE}
+
+
+```
+
+
+#### Question 6. 
+Take the squared root of the result from question 5 and store it as a named object.
+
+```{r, include=FALSE, echo=FALSE}
+
+```
+
+#### Question 7. 
+What is the difference between a matrix and a data frame
+
+```{r}
+
+```
+
+
+#### Question 8. 
+The dataset below has been stored as a matrix. However, the data type of some of the elements have lost their original characteristics. Use the functions mode(), str() and class() to inquire about the dataset's properties.
+
+What data structure (e.g. list, data frame, array, etc.) would you use instead to store the dataset below, and why?
+
+```{r , include=FALSE}
+
+peter_piper <- matrix(c("Peter", 5, "Piper", 8.5, "couldn't", "find", 10, "peppers"), nrow = 2, ncol = 4)
+
+```
+
+#### Question 9. 
+Take the vectors below and create a data frame called "weather" (see rmd file). Did the objects and elements preserve their original data types (i.e. still being character or numeric?). Use the functions mode(), str() and class() to inquire about the dataset's properties. Any differences compared to matrix created in question #8?
+
+```{r, include=FALSE}
+
+day <- 1:10
+
+min_temp <- c(50.7,52.8,48.6,53.0,49.9,47.9,54.1,47.6,43.6,45.5)
+
+max_temp <- c(59.5,55.7,57.3,71.5,69.8,68.8,67.5,66.0,66.1,61.7)
+
+sky <- c("cloudy", "clear", "cloudy", "clear", "cloudy", "clear", "cloudy", "clear", "cloudy", "clear")
+
+
+```
+
+
+#### Question 10. 
+Create and store (i.e., name the object) a vector that starts at 5 and ends at 90 by intervals of 15. Using a R function, how long is this object? 
+Hint: inquire about the “seq()” function.
+
+```{r, include=FALSE}
+
+
+```
+
+
+#### Question 11. 
+Using a different method than how you answered question 1, create a named vector that is of the same size as the vector from Question 1 (filled with any numbers). Then combine along rows this new vector with the vector from Question 1, and name this new object. 
+Hint: take a look at the “rbind()” function.
+
+```{r, include=FALSE}
+
+
+```
+
+What kind of object is this? What are its dimensions? Transpose this new object and name the resulting object as ‘zz’ (zed-zed, or zee-zee -if you're American! :p ). Just google how to transpose objects in R.
+
+```{r, include=FALSE}
+
+
+```
+
+#### Question 12.
+Create and store a 3x4 matrix, and fill it by column (the default command in the “matrix()” function) with a sequence of numbers from 12 to 1.
+
+```{r, include=FALSE}
+
+
+
+```
+
+
+#### Question 13.
+Using the "rep()" function, create a vector of string/character data that is 6 elements long and call it "treatment". The first 3 elements should read “Treatment 1” and the last 3 elements should read “Control”. 
+
+What kind of data is this (use R code to answer this question)? Convert this vector into a factor. What are its levels?
+
+```{r, include=FALSE}
+
+
+```
+
+
+#### Question 14.
+Create an array of dimensions 6 x 4 x 2, and fill the array only with odd numbers starting at 1. Interact with the array using square brackets to find out what is the value of the 3rd row, 2nd column, 2nd slice?
+
+```{r, include=FALSE, eval=FALSE}
+
+
+```
+
+#### Question 15.
+Create a data frame that combines the object ‘zz’, and the object ‘treatment’. Change the column names to "day 1", "day 2" and "group".
+
+What are its dimensions? What is the structure of the object? What does R consider each of the three different columns’ data types to be?
+
+```{r, include=FALSE}
+
+```
+
+
+### Data management and extraction
+
+
+#### Question 16.
+Four volunteers assited you with petal and sepal measurements: Tom, Jerry, and Sylvester, alternated sampling each observation in the "iris.dataset". Create a new data column that reflects this.
+
+Read iris.datset:
+```{r}
+
+```
+
+
+With base R
+```{r}
+
+```
+
+
+With dplyr
+```{r}
+
+```
+
+
+#### Question 17.
+Upon reviewing your notes from this measurements, you discover that the volunteer “Tom” was confused about the procedure measuring all petal widths in species setosa. Using 1 line of code, change the the petal width measurements to NA. Then proceed to chastise Tom.
+```{r, echo=FALSE, include=TRUE}
+
+
+            
+```
+
+
+#### Question 18.
+Calculate and create two new columns in your dataset for the upper and lower 95% confidence intervals for each sepal length measurement. The 95% confidence intervals are the mean of sepal length by species +/- 1.96 times the standard deviation.
+
+```{r, echo=FALSE, include=TRUE}
+
+
+
+```
+
+
+#### Question 19.
+Create a boxplot showing the uncertainty in mean petal width per day for the all the iris  species.
+
+```{r, echo=FALSE, include=TRUE}
+
+```
+
+
+
