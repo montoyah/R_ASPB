@@ -1,0 +1,113 @@
+---
+title: "6. Flow control"
+author: "Oscar Montoya"
+date: "October 13, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+methane <- read.csv("methane long with replicates.csv", stringsAsFactors = FALSE, header = TRUE, check.names = FALSE)
+head(methane)
+```
+
+
+
+## Normality tests
+
+
+```{r}
+ # H0: data normally distributed
+```
+
+
+## Homokedastcity tests
+Bartlett's: sensitive to departures from normality (Levene's test is less sensitive to departures from normality)
+
+
+```{r}
+# for entire dataset
+
+
+
+# levels of factor group
+
+
+
+
+   # If Chi-squared > Bartlett's K-squared, not reject Ha, so there is homokedasticity. 
+?qchisq
+```
+
+
+## t-tests
+
+```{r}
+library(dplyr)
+
+   # compound_group is a unique identifier to pick up singularities
+
+
+
+
+```
+
+
+## Linear regressions and ANOVA
+
+```{r}
+library(dplyr)
+head(methane)
+
+# what is the best model that best explains my data? Akaike Information Criterion
+
+
+#looking for the best combination of factors that explain the variance better. Let's fpcus on unamended and tratments only
+ 
+ # the lowest score is the model taht best explains my response variable
+
+# * evaluates also the interation between the two factors
+
+
+
+
+
+
+
+```
+
+
+## Poshoc tests 
+What tests are out there?
+
+Tukey
+```{r}
+# Why the error?
+
+
+
+
+# Fix the error
+
+
+
+
+#Tukey for groups, salinity and replicates
+  #there is difference
+
+
+
+# access parts specific values in the pos-hoc test
+
+
+```
+
+
+
+
+
+

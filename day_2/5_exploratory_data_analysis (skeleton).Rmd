@@ -1,0 +1,307 @@
+---
+title: "Introduction to data analysis and visualization with R_RStudio. Exploratory data analysis"
+author: "Oscar Montoya, M.Sc."
+date: "December 3rd, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+First, clean your environment and set a working directoty
+
+
+```{r}
+rm(list=ls(all=TRUE))
+#setwd("/home/oscar/MEGAsync/RMaterials/RASPB/day2/") # personal laptop
+#setwd("/home/oscar/MEGA/MEGAsync/RMaterials/RASPB/day2") # bioinf computer 
+
+list.files()
+getwd()
+```
+
+
+Load all packages at the same time by using lapply. Keep this or load packages with :: operator?
+```{r}
+
+```
+
+
+## Management
+
+
+Methanogenic oil sands incubations
+```{r}
+list.files()
+
+
+
+```
+
+The data is curently in wide format, so this first task is to turn it into long format (tabular data, prefered for R and easier for tasks like automation).
+
+Will use reshape2 to melt (wide to long) the methane.data using "umoles" of methane as value name and "date" as variable name for reorganizing the dataset
+
+
+```{r}
+# from wide to long format
+library(reshape2)
+
+
+
+
+
+#View(methane.data.long)
+str(methane.data.long)
+class(methane.data.long)
+is.data.frame(methane.data.long)
+typeof(methane.data.long)
+```
+
+
+
+## Cleansing and reorganizing data
+Data is now in long format. Now let's calculate the number of days, means, sd, 
+
+
+
+Calculate number of days between two dates
+```{r}
+
+
+
+```
+
+Let's analyze the code line by line.
+Remeber that R reads the code "inside out", using parenthesis and brackets to indicate the levels. 
+```{r}
+#The first piece of code that will be interpreted is
+methane.data.long$date
+
+#then the as.Date function:
+?as.Date
+as.Date(methane.data.long$date)
+
+#then difftime function (latest date - earliest date):
+?difftime
+
+difftime(time1 = as.Date(methane.data.long$date), 
+         time2 = '2014-08-19', 
+         units = c("day")) # Notice that the results have doubles (floats) numbers
+
+# Next, use the most external function, round, to get rid of floats and only keep the integers
+
+round(difftime(time1 = as.Date(methane.data.long$date), 
+               time2 = '2014-08-19', 
+               units = c("day")))
+
+```
+
+Now we're ready to add the number of days into the methane.data.long object.
+
+
+Excercise 1.
+Add the results of the rounded difftime function to "methane.data.log" dataset. The results should be stored in a column called "day"
+```{r}
+
+"the code to create the day column goes here" <- round(difftime(time1 = as.Date(methane.data.long$date), 
+                                                                time2 = '2014-08-19', 
+                                                                units = c("day")))
+
+
+
+
+
+
+#write.csv(methane.data.long, "methane long with replicates.csv", row.names = FALSE, quote = FALSE)
+```
+
+
+## Exploratory data analysis
+
+1. Generate questions about your data.
+
+2. Search for answers by visualising, transforming, and modelling your data.
+
+3. Use what you learn to refine your questions and/or generate new questions.
+(https://r4ds.had.co.nz/exploratory-data-analysis.html)
+
+
+Useful questions (very general)
+
+What type of variation occurs within my variables?
+What type of covariation occurs between my variables?
+(https://r4ds.had.co.nz/exploratory-data-analysis.html)
+
+Questions:
+What kind of data do I have? 
+Is it continuos or discrete? 
+Do I have missing values? What to do with them? Are NAs properly placed where data is missing? 
+What are the unique values for each of my variables? 
+How many variables and observations do I have? Do I need all of them?
+What is my response variable? How many response variables do I have? 
+How many explanatory variables do I have?
+Does my data follow a normal distribution? 
+What normality tests should I use?
+Homokedasticity?
+
+
+
+```{r}
+dim(methane.data.long)
+ncol(methane.data.long)
+nrow(methane.data.long)
+str(methane.data.long)
+unique(methane.data.long$compound)
+range(methane.data.long$umoles, na.rm = TRUE)
+
+```
+
+
+Visualize distributions. We have continuos data (resonpose variable decimal places of methane measurements)
+```{r}
+library(ggplot2)
+
+   # breaks it down in intervals of 5 units
+
+# Change the binwidth let's you see different patters in your data
+     # breaks it down in intervals of 5 units
+
+# overlay historgrams
+
+    # medium only and sterile dopn;t ahve methane so they don;t show up in the plot
+
+
+
+
+# compute by hand
+library(dplyr)
+     # breaks it down in intervals of 5 units
+
+
+```
+
+For example, a question that arises from this plots would be: If I didn't add any carbon source to the "unamended controls", why am I seeing methane formation in these incubations? (altenative carbon sources can be dead cells (necromass) and substrate carryovers from previous incubations, so controls are key!!! alongside replication, power analysis!!!!!!)
+
+
+Do I have outliers?
+Hard to see in a histogram, can I do boxplots?
+```{r}
+
+
+
+
+```
+Why is there a point in one of the unamended controls that has more methane than any substrate-amended incuabtion???
+
+Do I have any missing values
+
+```{r}
+
+
+
+# wy is day reported as "days"?
+     # is a special type of data becuase we used the function "days"
+
+```
+
+## Covariation
+What varies when methane varies? Is that a thing in this dataset or not?
+
+```{r}
+library(ggplot2)
+
+
+
+
+?geom_line
+?facet_grid
+head(methane.data.long)
+str(methane.data.long)
+```
+
+There is a tendency: methane increases with time in most of the treatments but also in the susbtrate-free (unamended) controls. The trends are hard to visualize because beause with are still working with replicates. Before proceeding, we'll need to get the mean of those triplicates, and since we're doing that let's get standard deviations too. this all is still part of the exploratory data analysis (centreal tendecny and dispersion measures)
+
+
+
+## Central tendency and dispersion measures.
+
+Now, let's add dispersion and central tendency measures to our dataset. We'll use dplyr for that purpose. We have triplicates and we want to get those means by replicate
+
+Add columns with the mutate function, get stats with summarise
+```{r}
+library(dplyr)
+
+# add all the columns except the one you're trying to use as grouping
+
+
+
+head(methane)
+
+# if you have many columns to add, take columns out instead of retyping most of them (group_by_at)
+
+
+
+# A shorter way
+
+
+head(methane)
+#View(methane)
+
+# same code with base R and its aggregate function. Notice the that column names are added as suffix to "umoles"
+
+
+
+
+
+
+head(methane)
+str(methane)
+
+# Remove umoles. part of the new column names simultaneously.
+?gsub
+
+
+
+
+# now we have a tibble and it has a special type of management (is an optimized data frame)
+str(methane)
+
+
+# Re-run some of the exploratory data analysis now that we have some central tendency
+
+
+
+
+# We need a unique identifier. WIll go back to this once we're ready for plotting
+
+
+# let's ride
+```
+
+
+Other central tendency measures
+```{r}
+
+
+
+
+```
+
+
+Now we're ready to make graphics using the "methane" dataset
+
+Export the "methane" dataset as a csv and rds file
+```{r}
+head(methane, 15)
+
+# csv file
+write.csv(methane, "methane.csv", quote = FALSE, row.names = FALSE)
+
+# rds file
+
+saveRDS(methane, "methane.rds")
+
+```
